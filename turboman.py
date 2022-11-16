@@ -36,3 +36,16 @@ print('----------------------------------------------------------------')
 print(u_y)
 print('----------------------------------------------------------------')
 
+# annan fil
+def Autocorf(u):
+  R = np.zeros(N)
+  for dj in range(N):
+   R[dj] = np.sum( [np.sum(u[:,j]*u[:,np.mod(j+dj,N)] ) for j in range(N) ] ) /np.sum( u**2)   
+  return R
+
+def Autocorg(u):
+  R = np.zeros(N)
+  for dj in range(N):
+   R[dj] = np.sum( [np.sum(u[j,:]*u[np.mod(j+dj,N),:] ) for j in range(N) ] ) /np.sum( u**2)   
+  return R
+
