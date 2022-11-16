@@ -1,40 +1,44 @@
-num_relalizations = 2;
-N =4;
+#import matplotlib.pyplot as plt
+num_relalizations = 10;
+N =128;
 u = np.zeros( (2, N, N))  
 u_sum= np.zeros( (2, N, N)) 
 
-u+u_sum
+x= np.arange(0,N)
+Rxxf = np.zeros(N)
+Ryyf = np.zeros(N)
+Rxxg = np.zeros(N)
+Ryyg = np.zeros(N)
+urms = 0
 
 for i in range(num_relalizations):
-  u = Synthesis_Random2dIsotropic_Vector_or_Scalar(EnergySpectrum, N=N, L_0=1/4, eta_Kolmogorov=1/10000, L_all=1)
-  u_sum = u_sum + u;
+  u = Synthesis_Random2dIsotropic_Vector_or_Scalar(EnergySpectrum, N=N, L_0=1/4, eta_Kolmogorov=1/N, L_all=1)
+  u_x = u[0, :, :]
+  u_y = u[1, :, :]
+  Rxxf += Autocorf(u_x)
+  Ryyf += Autocorf(u_y)
+  Rxxg += Autocorg(u_x)
+  Ryyg += Autocorg(u_y)
+ 
+for i in range(N):
+  for j in range(N):
+    urms += u_x[i][j]**2 + u_y[i][j]**2
 
-u_average = u_sum/num_relalizations
+urms = urms/2/N**2
 
-u_x = u_average[0, :, :]
-u_y = u_average[1, :, :]
+print(urms)
 
-u_x1 = u_x[0,:];
+Rxxf = Rxxf/num_relalizations
+Ryyf = Ryyf/num_relalizations
+Rxxg = Rxxg/num_relalizations
+Ryyg = Ryyg/num_relalizations
 
-Rxxf = Autocorf(u_x)
-Ryyf = Autocorf(u_y)
+g = (Rxxg + Ryyg) * urms/2
 
-Rxxg = Autocorg(u_x)
-Ryyg = Autocorg(u_y)
+f = (Rxxf + Ryyf)*urms/2;
 
-
-print(Rxxf)
-print('----------------------------------------------------------------')
-print(Ryyf)
-print('----------------------------------------------------------------')
-print(Rxxg)
-print('----------------------------------------------------------------')
-print(Ryyg)
-
-print(u_x)
-print('----------------------------------------------------------------')
-print(u_y)
-print('----------------------------------------------------------------')
+plt.plot(x/N, g )
+plt.plot(x/N, f )
 
 # annan fil
 def Autocorf(u):
