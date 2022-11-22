@@ -29,4 +29,20 @@ ax.set_xlabel('$y/ \delta_X  $')
 #ax.set_ylabel(r'$k(\kappa,\infty)/k \;,\; \epsilon(0,\kappa)/\epsilon$')
 ax.set_title('Normalized velocity and shear-stress profiles from Blasius solution')
 
+# Uppgift 3
+#--------------------------------------------------------
+dx = 1
+div = np.zeros(100)
+x = np.linspace(1,100, 100)
+i =0;
+i_plt = 80
+for i in range(100):
+  diff_u_blasius = u_blasius[i_plt, i] - u_blasius[i_plt, i+1] 
+  diff_v_blasius = v_blasius[i_plt, i] - v_blasius[i_plt +1, i] 
+  div[i] = diff_u_blasius + diff_v_blasius
+
+print(div)
+
+plt.plot(x, div)
+
 
