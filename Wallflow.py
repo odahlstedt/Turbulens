@@ -78,7 +78,21 @@ ax.set_xlabel('$y/ \delta_X  $')
 
 # Uppgift 5
 #--------------------------------------------------------
-
+Cf = np.zeros(100)
+Re = np.linspace(2000,100000, 100)
+i =0;
+k=0.41
+B=5.2
+PI=0.5
+for i in range(100):
+ Cf[i] = 2*((1/k)*sym.log(Re[i]**0.8)+5.2+(0.5/0.41)*2)**(-2)
+ 
+fig = plt.figure()
+ax = fig.add_subplot(1,1,1)
+ax.plot(Re, Cf)
+ax.set_xlabel('Re')
+ax.set_ylabel('$C_f$')
+ax.set_title('$C_f$ (Re)')
 
 
 # Ett sätt att lösa intergral på
