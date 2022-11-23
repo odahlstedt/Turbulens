@@ -94,6 +94,23 @@ ax.set_xlabel('Re')
 ax.set_ylabel('$C_f$')
 ax.set_title('$C_f$ (Re)')
 
+# Uppgift 6
+#--------------------------------------------------------
+Re  = 10000;
+U_0 = 1/k * math.log(Re**0.8) + B + 2*PI/k
+
+delta_star =np.trapz(1-u_bar/U_0 , dx = 1/100)
+theta =np.trapz((u_bar/U_0)*(1-u_bar/U_0) , dx = 1/100)
+
+# Gets delta99      
+for i in range(100):
+  if u_bar[i]/U_0 > 0.99:
+    break
+delta99=(x[i])
+
+print('delta_star/delta99 = ', delta_star/delta99)
+print('theta/delta99 = ',theta/delta99)
+print('delta_star/theta = ', delta_star/theta)
 
 # Ett sätt att lösa intergral på
 #--------------------------------------------------------
