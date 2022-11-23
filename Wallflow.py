@@ -46,7 +46,38 @@ print(div)
 plt.plot(x, div)
 
 
+# Uppgift 4
+#--------------------------------------------------------
+import math
 
+U_0 = np.zeros(100)
+wake = np.zeros(100)
+law_of_wall = np.zeros(100)
+x = np.linspace(0.001,1.001, 100)
+i =0;
+k=0.41
+B=5.2
+PI=0.5
+Re=10000;
+for i in range(100):
+ law_of_wall[i]=(1/k)*sym.log(Re**0.8*x[i])+5.2
+ wake[i]=(0.5/0.41)*2*sym.sin((3.14/2)*x[i])**2
+
+u_bar = law_of_wall  + wake
+fig = plt.figure()
+ax = fig.add_subplot(1,1,1)
+
+ax.plot(x, u_bar, 'r', label= '$ sum $')
+ax.plot(x, law_of_wall, 'y', label= 'log law')
+ax.plot(x, wake, 'b', label= 'wake contribution')
+
+ax.legend()
+ax.set_xlabel('$y/ \delta_X  $')
+#ax.set_ylabel(r'$k(\kappa,\infty)/k \;,\; \epsilon(0,\kappa)/\epsilon$')
+#ax.set_title('Normalized velocity and shear-stress profiles from Blasius solution')
+
+# Uppgift 5
+#--------------------------------------------------------
 
 
 
