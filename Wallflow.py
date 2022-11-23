@@ -46,3 +46,23 @@ print(div)
 plt.plot(x, div)
 
 
+
+
+
+
+# Ett sätt att lösa intergral på
+#--------------------------------------------------------
+from scipy.integrate import quad
+
+def u(y):
+  return (1/k)*sym.log(Re**0.8*y)+5.2 + (0.5/0.41)*2*sym.sin((3.14/2)*y)**2
+
+def integrand(y):
+    return 1-u(y)/U_0 
+delta = quad(integrand, 0, 1)
+
+def integrand(y):
+    return u(y)/U_0 * (1-u(y)/U_0 )
+theta = quad(integrand, 0, 1)
+
+
